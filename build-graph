@@ -1,0 +1,14 @@
+#!/bin/sh
+mvn jdepend:generate
+# on my workstation, JDEPEND_HOME is in ~/Library/jdepend-2.9.1
+xsltproc ${JDEPEND_HOME}/contrib/jdepend2dot.xsl target/jdepend-report.xml > doc/jdepend.dot
+sccmap -odoc/strong.dot doc/jdepend.dot
+
+dot          -Tsvg -odoc/jdepend.svg       doc/jdepend.dot 
+circo -s2000 -Tsvg -odoc/jdepend-circo.svg doc/jdepend.dot 
+
+dot          -Tsvg -odoc/strong.svg        doc/strong.dot 
+circo -s2000 -Tsvg -odoc/strong-circo.svg doc/strong.dot
+
+
+
