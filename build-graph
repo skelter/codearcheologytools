@@ -4,11 +4,14 @@ mvn jdepend:generate
 xsltproc ${JDEPEND_HOME}/contrib/jdepend2dot.xsl target/jdepend-report.xml > doc/jdepend.dot
 sccmap -odoc/strong.dot doc/jdepend.dot
 
-dot          -Tsvg -odoc/jdepend.svg       doc/jdepend.dot 
-circo -s2000 -Tsvg -odoc/jdepend-circo.svg doc/jdepend.dot 
+mkdir -p doc/circo
+cp doc/jdepend.dot doc/circo/
+circo -s2000 -Tsvg -O       doc/circo/jdepend.dot 
+dot          -Tsvg -O       doc/jdepend.dot
 
-dot          -Tsvg -odoc/strong.svg        doc/strong.dot 
-circo -s2000 -Tsvg -odoc/strong-circo.svg doc/strong.dot
+cp doc/strong.dot doc/circo/
+circo -s2000 -Tsvg -O       doc/circo/strong.dot
+dot          -Tsvg -O       doc/strong.dot 
 
 
 
